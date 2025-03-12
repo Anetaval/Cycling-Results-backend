@@ -6,7 +6,17 @@ const path = require('path');
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(cors());
+const cors = require('cors');
+
+const allowedOrigins = [
+  'http://localhost:3000', // pro vývoj
+  'https://cycling-results-frontend.onrender.com' // pro budoucí deploy
+];
+
+app.use(cors({
+  origin: allowedOrigins
+}));
+
 
 // ✅ GET /api/events - seznam závodů (list.json)
 app.get('/api/events', (req, res) => {
